@@ -7,14 +7,21 @@ public class Spawn : MonoBehaviour
 
     public Transform startPos;
     public Transform endPos;
+    public Transform parentVehicles;
 
-    public GameObject vehicle;
+    public GameObject vehiclePrefab;
     private BoxCollider collider;
+
 
     public LayerMask vehicleLayer;
 
+    public int maxTimeSpawn;
     public int vehicleCount = 0;
-    private int maxVehicles = 3;
+    public bool spawnPointIsFree = false;
+    public int maxVehicles = 3;
+
+    private float timeToSpawn;
+
 
     // Start is called before the first frame update
     void Awake() {
@@ -24,21 +31,38 @@ public class Spawn : MonoBehaviour
     {
         CreateCar();
     }
+    
+    void Update()
+    {
+        timeToSpawn -= Time.deltaTime;
+
+        if (timeToSpawn < 0 && spawnPointIsFree && vehicleCount < maxVehicles)
+        {
+            SpawnCar();
+        }
+    }
 
     public void CreateCar() {
-        vehicle = Instantiate(vehicle, startPos.position, Quaternion.identity, transform);
+        GameObject vehicle = Instantiate(vehiclePrefab, startPos.position, Quaternion.identity, transform);
         vehicle.GetComponent<Car>().carSpawner = this; //checar se isso nao vai dar errado em runtime com a instancia de vehicle
         vehicleCount++;
     }
+
     private void OnTriggerExit(Collider other) {
         print(collider.gameObject.layer);
-        if (other.gameObject.layer == 9) {
+        if ((vehicleLayer & (1 << other.gameObject.layer)) != 0) {
 
-            if (vehicleCount < maxVehicles) {
-                CreateCar();
-            }
+            spawnPointIsFree = true;
         }
         
+    }
+
+    private void SpawnCar()
+    {
+        spawnPointIsFree = false;
+        timeToSpawn = Random.Range(0.5f, maxTimeSpawn);
+
+        CreateCar();
     }
 
 }

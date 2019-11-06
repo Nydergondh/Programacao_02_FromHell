@@ -16,7 +16,7 @@ public class Car : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (transform.position.x < carSpawner.endPos.position.z) {
+        if (transform.position.x < carSpawner.endPos.position.x) {
             transform.position = new Vector3((transform.position.x)  + carSpeed * Time.deltaTime, transform.position.y, transform.position.z);
         }
         else {
