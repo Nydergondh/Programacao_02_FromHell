@@ -764,5 +764,17 @@ PrefabInstance:
       propertyPath: m_Center.x
       value: -19.119007
       objectReference: {fileID: 0}
+    - target: {fileID: 2367389036410684781, guid: b35e54c8065cb2e43a97c55b93ae8ff6,
+        type: 3}
+      propertyPath: m_Icon
+      value: 
+      objectReference: {fileID: 5721338939258241955, guid: 0000000000000000d000000000000000,
+        type: 0}
+    - target: {fileID: 2367389037488801260, guid: b35e54c8065cb2e43a97c55b93ae8ff6,
+        type: 3}
+      propertyPath: m_Icon
+      value: 
+      objectReference: {fileID: 5721338939258241955, guid: 0000000000000000d000000000000000,
+        type: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b35e54c8065cb2e43a97c55b93ae8ff6, type: 3}
